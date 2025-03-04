@@ -1,4 +1,3 @@
-// functions/paypal-webhook.js
 const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
@@ -9,24 +8,28 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  console.log('Parsing body...');
   const body = JSON.parse(event.body);
   console.log('Parsed body:', body);
 
   // イベントタイプを確認
   if (body.event_type === 'PAYMENT.SALE.COMPLETED' || body.event_type === 'BILLING.SUBSCRIPTION.ACTIVATED') {
+    console.log('Processing event:', body.event_type);
+
     // 支払い成功時の処理
     const sale = body.resource;
     const saleId = sale.id;
-    const amount = sale.amount ? sale.amount.total : 'N/A'; // サブスクリプションの場合、amountがないかもしれません
+    const amount = sale.amount ? sale.amount.total : 'N/A';
 
     console.log('Sale completed:', saleId, 'Amount:', amount);
 
     // 任意のURLにリダイレクト
-    const redirectUrl = 'https://www.yahoo.co.jp/'; // 任意のURLを指定
+    const redirectUrl = 'https://www.yahoo.co.jp/';
     console.log('Redirecting to:', redirectUrl);
 
     // リダイレクトを実行
     await fetch(redirectUrl);
+    console.log('Redirect executed');
 
     return {
       statusCode: 200,
