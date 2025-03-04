@@ -1,0 +1,13 @@
+{
+    "name": "my-static-site-repo",
+    "version": "1.0.0",
+    "description": "A static site with PayPal webhook integration",
+    "main": "index.js",
+    "scripts": {
+      "build": "echo \"No build script defined\""
+    },
+    "dependencies": {
+      "node-fetch": "^2.6.1"
+    }
+  }
+  
