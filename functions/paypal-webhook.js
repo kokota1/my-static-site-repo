@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
 
     console.log('Sale completed:', saleId, 'Amount:', amount);
 
-    // 任意のURLにリダイレクト
+    // 任意のURLにリダイレクト（変更点）
     const redirectUrl = 'https://www.yahoo.co.jp/';
     console.log('Redirecting to:', redirectUrl);
 
